@@ -103,3 +103,4 @@ originals*
 *.pdf
 *.pkl
 *.h5
+*.npy
