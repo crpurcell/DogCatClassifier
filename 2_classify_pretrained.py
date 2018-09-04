@@ -153,6 +153,12 @@ def train_top_model():
     validData = np.load(open('2_featuresValid.npy'))
     nValidData = validData.shape[0]
     validLabels = np.array([0] * (nValidData / 2) + [1] * (nValidData / 2))
+
+    # Feedback
+    print("Train Shape: %s" % str(trainData.shape))
+    print("Valid Shape: %s" % str(validData.shape))
+    print("Input Shape: %s" % str(trainData.shape[1:]))
+    raw_input("Press <RETURN> ...")
     
     # Build a simple fully-connected model do the classification
     model = Sequential()
