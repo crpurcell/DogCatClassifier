@@ -11,7 +11,7 @@ by Francois Chollet. The dataset for this example is available from [kaggle](htt
 
 Create a directory tree as follows
 ```
-├── data
+├── DATA
     ├── train
     │   ├── cats
     │   └── dogs

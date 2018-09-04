@@ -20,8 +20,8 @@
 from __future__ import print_function
 
 # Training and validation data directories
-dirTrain = "data/train"
-dirValid = "data/validation"
+dirTrain = "DATA/train"
+dirValid = "DATA/validation"
 
 # Image dimensions
 imgWidth, imgHeight = 150, 150
@@ -59,20 +59,20 @@ def main():
         inShape = (3, imgWidth, imgHeight)
     else:
         inShape = (imgWidth, imgHeight, 3)
-    
+
     # Use the Sequential API to define linear stack of layers
     # 1st layer should have a defined input shape
     model = Sequential()
     print("Defining the model ...", end="")
     sys.stdout.flush()
-    
+
     # 1st layer: convolution with a 3x3 kernel, 32 output filters
     #            'rectified linear unit' normalisation
     #            pool to decrease size of output
     model.add(Conv2D(32, (3, 3), input_shape=inShape))
     model.add(Activation('relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    
+
     # 2nd layer: convolution with a 3x3 kernel, 32 output filters
     #            'rectified linear unit' normalisation
     #            MaxPooling to decrease size of output
@@ -122,13 +122,13 @@ def main():
         #height_shift_range=0.2,  # shift images vertically
         #rotation_range=179,      # randomly rotate
         horizontal_flip=True)    # flip horizontal
-    
+
     # For testing, we want to normalise RGB to 0-1 range, otherwise weights
     # will need to have too high a range for typical learning rate.
     validDataGen = ImageDataGenerator(rescale=1. / 255)
     print("done.")
     sys.stdout.flush()
-    
+
     # Define a training directory iterator set to resizing on the flow.
     # Assumes one sub-directory per class, ordered alpha-numerically and
     # will create an augmented batch of images when iterated.
@@ -146,9 +146,9 @@ def main():
         target_size=(imgWidth, imgHeight),
         batch_size=batchSize,
         class_mode='binary')   # Two classes
-    
+
     # Finally, train the network
-    raw_input("\nReady to start training. Press <RETURN>: ")
+    input("\nReady to start training. Press <RETURN>: ")
     timeStart = time.time()
     history = model.fit_generator(
         trainGen,
@@ -160,7 +160,7 @@ def main():
     timeEnd = time.time()
     runTime_min = (timeEnd-timeStart)/60.0
     print("Training took %.1f minutes." % runTime_min)
-    
+
     # Save the weights in a HDF5 file
     model.save_weights('1_classifier_weights.h5')
 
@@ -188,7 +188,7 @@ def main():
     ax2.set_title("Model Accuracy")
     ax2.set_ylabel("Accuracy")
     ax2.set_xlabel("Epoch")
-    
+
     # Nice formatting
     ax1.tick_params(pad=7)
     for line in ax1.get_xticklines() + ax1.get_yticklines():
@@ -197,10 +197,10 @@ def main():
     for line in ax2.get_xticklines() + ax2.get_yticklines():
         line.set_markeredgewidth(1)
     plt.tight_layout()
-    fig.savefig("1_classifier_accuracy.pdf", format='pdf' )    
+    fig.savefig("1_classifier_accuracy.pdf", format='pdf' )
     fig.show()
     raw_input("Press <RET> to exit ...")
-    
+
 
 #-----------------------------------------------------------------------------#
 if __name__ == "__main__":
