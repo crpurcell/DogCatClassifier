@@ -104,3 +104,12 @@ originals*
 *.pkl
 *.h5
 *.npy
+
+HIST
+HIST/*
+
+MODELS
+MODELS/*
+
+PDF
+PDF/*
